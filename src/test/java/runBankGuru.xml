@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Suite" parallel="tests">
+	<test name="New Customer, Edit Customer on Chrome">
+		<parameter name="browser" value="chrome" />
+		<parameter name="environment" value="prod" />
+		<parameter name="version" value="98.0.4758.102" />
+		<parameter name="dataJson" value="BankGuru.json" />
+		<classes>
+			<class name="com.aspire.script.Register" />
+			<class name="com.aspire.script.NewCustomer" />
+			<class name="com.aspire.script.EditCustomer" />
+		</classes>
+	</test>
+	<!-- <test name="New Customer, Edit Customer on Firefox"> -->
+	<!-- <parameter name="browser" value="firefox" /> -->
+	<!-- <parameter name="environment" value="prod" /> -->
+	<!-- <parameter name="version" value="2.44" /> -->
+	<!-- <parameter name="dataJson" value="BankGuru.json" /> -->
+	<!-- <classes> -->
+	<!-- <class name="com.bankguru.customer.NewCustomer" /> -->
+	<!-- <class name="com.bankguru.customer.EditCustomer" /> -->
+	<!-- </classes> -->
+	<!-- </test> -->
+</suite> 
