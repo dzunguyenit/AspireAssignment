@@ -367,23 +367,6 @@ public class BaseElement {
 		}
 	}
 
-	// Bonus
-	public void highlightElement(WebElement element) {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript(jsColorBorderElement, element);
-	}
-
-	// Bonus
-	public Object removeAttribute(WebElement element, String attribute) {
-		try {
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			return js.executeScript("arguments[0].removeAttribute('" + attribute + "');", element);
-		} catch (Exception e) {
-			e.getMessage();
-			return null;
-		}
-	}
-
 	// Wait
 	public void waitPresence(String locator) {
 		WebDriverWait wait = new WebDriverWait(driver, timeouts);

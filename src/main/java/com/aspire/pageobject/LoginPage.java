@@ -42,19 +42,16 @@ public class LoginPage extends BaseElement {
 
 	public void inputEmail(String username) {
 		waitVisible(EMAIL_TXT);
-		highlightElement(EMAIL_TXT);
 		input(EMAIL_TXT, username);
 	}
 
 	public void inputPassword(String password) {
 		waitVisible(PASSWORD_TXT);
-		highlightElement(PASSWORD_TXT);
 		input(PASSWORD_TXT, password);
 	}
 
 	public HomePage clickSubmitButton() {
 		waitVisible(LOGIN_BTN);
-		highlightElement(LOGIN_BTN);
 		click(LOGIN_BTN);
 		return PageFactory.initElements(driver, HomePage.class);
 	}

@@ -36,13 +36,11 @@ public class RegisterPage extends BaseElement {
 
 	public String getUserIDInfo() {
 		waitVisible(USER_ID_TEXT);
-		highlightElement(USER_ID_TEXT);
 		return getText(USER_ID_TEXT);
 	}
 
 	public String getPasswordIDInfo() {
 		waitVisible(PASSWORD_ID_TEXT);
-		highlightElement(PASSWORD_ID_TEXT);
 		return getText(PASSWORD_ID_TEXT);
 	}
 

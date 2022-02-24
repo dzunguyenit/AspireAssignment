@@ -20,7 +20,7 @@ public class Register extends BaseTest {
 	RegisterPage registerPage;
 	HomePage homePage;
 	AbstractObJectJson data;
-	String pathData = "/Data/";
+	String pathData = "/data/";
 	ManageEnviroment.Enviroment urlEnviroment;
 	String userPath = System.getProperty("user.dir");
 

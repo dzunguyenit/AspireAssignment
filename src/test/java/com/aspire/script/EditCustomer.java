@@ -19,7 +19,7 @@ public class EditCustomer extends BaseTest {
 	private HomePage homePage;
 	private EditCustomerPage editCustomerPage;
 	AbstractObJectJson data;
-	String pathData = "/Data/";
+	String pathData = "/data/";
 	String userPath = System.getProperty("user.dir");
 
 	@Parameters({ "browser", "environment", "version", "dataJson" })

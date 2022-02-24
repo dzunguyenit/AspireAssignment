@@ -27,7 +27,7 @@ public class NewCustomer extends BaseTest {
 
 	String email;
 	static String customerId;
-	String pathData = "/Data/";
+	String pathData = "/data/";
 	String userPath = System.getProperty("user.dir");
 
 	@Parameters({ "browser", "environment", "version", "dataJson" })

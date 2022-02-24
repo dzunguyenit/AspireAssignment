@@ -131,19 +131,16 @@ public class EditCustomerPage extends BaseElement {
 	// Field Name
 	public void pressTabNameField() {
 		waitVisible(CUSTOMERNAME_TXT);
-		removeAttribute(CUSTOMERNAME_TXT, "disabled");
 		inputKeys(CUSTOMERNAME_TXT, Keys.TAB);
 	}
 
 	public void enterNummericNameField(String nummericValueNameUpdate) {
 		waitVisible(CUSTOMERNAME_TXT);
-		removeAttribute(CUSTOMERNAME_TXT, "disabled");
 		input(CUSTOMERNAME_TXT, nummericValueNameUpdate);
 	}
 
 	public void enterSpecialCharacterNameField(String specialCharacterNameUpdate) {
 		waitVisible(CUSTOMERNAME_TXT);
-		removeAttribute(CUSTOMERNAME_TXT, "disabled");
 		input(CUSTOMERNAME_TXT, specialCharacterNameUpdate);
 	}
 
