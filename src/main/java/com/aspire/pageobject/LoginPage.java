@@ -8,52 +8,36 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage extends BaseElement {
 
-	public LoginPage(WebDriver driver) {
-		super(driver);
-	}
+    public LoginPage(WebDriver driver) {
+        super(driver);
+    }
 
-	@FindBy(xpath = "//a[contains(text(),'here')]")
-	WebElement HERE_LINK;
+    @FindBy(xpath = "//a[contains(text(),'here')]")
+    WebElement HERE_LINK;
 
-	@FindBy(css = "input[name='uid']")
-	WebElement EMAIL_TXT;
+    @FindBy(css = "#login")
+    WebElement txtEmail;
 
-	@FindBy(css = "input[name='password']")
-	WebElement PASSWORD_TXT;
+    @FindBy(css = "#password")
+    WebElement txtPassword;
 
-	@FindBy(css = "input[name='btnLogin']")
-	WebElement LOGIN_BTN;
+    @FindBy(css = "[type=submit]")
+    WebElement btnLogIn;
 
-	public String getLoginPageUrl() {
-		return getCurrentUrl();
-	}
+    public void inputEmail(String email) {
+        waitVisible(txtEmail);
+        input(txtEmail, email);
+    }
 
-	public RegisterPage clickHereLink() {
-		// if (driver.toString().toLowerCase().contains("internetexplorer")) {
-		// try {
-		// } catch (InterruptedException e) {
-		// e.printStackTrace();
-		// }
-		// }
-		waitVisible(HERE_LINK);
-		click(HERE_LINK);
-		return PageFactory.initElements(driver, RegisterPage.class);
-	}
+    public void inputPassword(String password) {
+        waitVisible(txtPassword);
+        input(txtPassword, password);
+    }
 
-	public void inputEmail(String username) {
-		waitVisible(EMAIL_TXT);
-		input(EMAIL_TXT, username);
-	}
-
-	public void inputPassword(String password) {
-		waitVisible(PASSWORD_TXT);
-		input(PASSWORD_TXT, password);
-	}
-
-	public HomePage clickSubmitButton() {
-		waitVisible(LOGIN_BTN);
-		click(LOGIN_BTN);
-		return PageFactory.initElements(driver, HomePage.class);
-	}
+    public HomePage clickLogInButton() {
+        waitVisible(btnLogIn);
+        click(btnLogIn);
+        return PageFactory.initElements(driver, HomePage.class);
+    }
 
 }
