@@ -84,13 +84,13 @@ public class ManufacturingOrder extends BaseTest {
 
 //        Check Current state is "draft"
         verifyEquals(manufacturingPage.getCurrentState("data-value"), "draft");
-//        Check state is active by get attribute "aria-checked" is True
+//        Check state "draft" is active by get attribute "aria-checked" is True
         verifyTrue(Boolean.valueOf(manufacturingPage.getCurrentState("aria-checked")));
         manufacturingPage.clickConfirm();
 
-//        Check Current state is "draft"
+//        Check Current state is "confirmed"
         verifyEquals(manufacturingPage.getCurrentState("data-value"), "confirmed");
-//        Check state is active by get attribute "aria-checked" is True
+//        Check state "confirmed" is active by get attribute "aria-checked" is True
         verifyTrue(Boolean.valueOf(manufacturingPage.getCurrentState("aria-checked")));
 
         manufacturingPage.clickMarkAsDone();
@@ -103,7 +103,7 @@ public class ManufacturingOrder extends BaseTest {
 
 //        Check Current state is "done"
         verifyEquals(manufacturingPage.getCurrentState("data-value"), "done");
-//        Check state is active by get attribute "aria-checked" is True
+//        Check state "done" is active by get attribute "aria-checked" is True
         verifyTrue(Boolean.valueOf(manufacturingPage.getCurrentState("aria-checked")));
 
     }
