@@ -2,7 +2,9 @@ package com.aspire.script;
 
 import com.aspire.object.json.AbstractObJectJson;
 import com.aspire.pageobject.HomePage;
+import com.aspire.pageobject.InventoryPage;
 import com.aspire.pageobject.LoginPage;
+import com.aspire.pageobject.ProductPage;
 import common.BaseTest;
 import common.ManageEnviroment;
 import org.aeonbits.owner.ConfigFactory;
@@ -17,6 +19,8 @@ public class ManufacturingOrder extends BaseTest {
     WebDriver driver;
     LoginPage loginPage;
     HomePage homePage;
+    InventoryPage inventoryPage;
+    ProductPage productPage;
     AbstractObJectJson data;
     String pathData = "/data/";
     ManageEnviroment.Enviroment urlEnviroment;
@@ -40,17 +44,21 @@ public class ManufacturingOrder extends BaseTest {
         log.info("----------OPEN BROWSER-----------");
 
         loginPage = PageFactory.initElements(driver, LoginPage.class);
-        loginPage.inputEmail(email);
-        loginPage.inputPassword(password);
-        homePage = loginPage.clickLogInButton();
     }
 
     @Test
     public void tc_01_LogInSuccessfully() {
-        loginPage = PageFactory.initElements(driver, LoginPage.class);
         loginPage.inputEmail(email);
         loginPage.inputPassword(password);
         homePage = loginPage.clickLogInButton();
+        verifyEquals(homePage.getUrlHomePage(), "https://aspireapp.odoo.com/web#cids=1&action=menu");
+
+    }
+
+    @Test
+    public void tc_02_LogInSuccessfully() {
+        inventoryPage = homePage.clickInventoryMenu();
+        productPage = inventoryPage.clickMenuProduct();
     }
 
     @AfterClass

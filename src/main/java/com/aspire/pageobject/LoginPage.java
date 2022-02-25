@@ -12,9 +12,6 @@ public class LoginPage extends BaseElement {
         super(driver);
     }
 
-    @FindBy(xpath = "//a[contains(text(),'here')]")
-    WebElement HERE_LINK;
-
     @FindBy(css = "#login")
     WebElement txtEmail;
 

@@ -6,11 +6,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class HomePage extends BaseElement {
+public class ProductPage extends BaseElement {
 
-    public HomePage(WebDriver driver) {
+    public ProductPage(WebDriver driver) {
         super(driver);
     }
+
 
     @FindBy(xpath = "//div[text()='Inventory']")
     WebElement lbInventory;
