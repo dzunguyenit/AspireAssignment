@@ -24,7 +24,7 @@ public class BaseElement {
         this.driver = driver;
     }
 
-    private int timeouts = 15;
+    private int timeouts = 5;
 
     // Web Browser
     protected void openUrl(String url) {
@@ -249,6 +249,11 @@ public class BaseElement {
 
     protected void hover(String locator) {
         WebElement element = driver.findElement(By.xpath(locator));
+        Actions action = new Actions(driver);
+        action.moveToElement(element).perform();
+    }
+
+    protected void hover(WebElement element) {
         Actions action = new Actions(driver);
         action.moveToElement(element).perform();
     }

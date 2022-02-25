@@ -15,7 +15,7 @@ public class ManufacturingPage extends BaseElement {
     @FindBy(xpath = "//button[@data-original-title='Create record']")
     WebElement btnCreateManufacturingOrders;
 
-    @FindBy(css = "#o_field_input_401")
+    @FindBy(xpath = "//div[@name='product_id']//input")
     WebElement txtOrderName;
 
     @FindBy(xpath = "//button[@title='Save record']")
@@ -49,7 +49,7 @@ public class ManufacturingPage extends BaseElement {
 
     public void inputOrderName(String orderName) {
         click(txtOrderName);
-        input(txtOrderName, orderName);
+        onlyInput(txtOrderName, orderName);
     }
 
     public void btnSaveRecord() {
