@@ -50,6 +50,7 @@ public class ManufacturingPage extends BaseElement {
     public void inputOrderName(String orderName) {
         click(txtOrderName);
         onlyInput(txtOrderName, orderName);
+        sleep(1);
     }
 
     public void btnSaveRecord() {
