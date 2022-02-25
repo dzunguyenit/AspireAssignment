@@ -15,6 +15,9 @@ public class HomePage extends BaseElement {
     @FindBy(xpath = "//div[text()='Inventory']")
     WebElement lbInventory;
 
+    @FindBy(xpath = "//div[text()='Manufacturing']")
+    WebElement lbManufacturing;
+
     public String getUrlHomePage() {
         sleep(2);
         return getCurrentUrl();
@@ -24,5 +27,10 @@ public class HomePage extends BaseElement {
         waitVisible(lbInventory);
         click(lbInventory);
         return PageFactory.initElements(driver, InventoryPage.class);
+    }
+    public ManufacturingPage clickManufacturingMenu() {
+        waitVisible(lbManufacturing);
+        click(lbManufacturing);
+        return PageFactory.initElements(driver, ManufacturingPage.class);
     }
 }

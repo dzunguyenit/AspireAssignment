@@ -119,8 +119,7 @@ public class BaseElement {
         return element.getFirstSelectedOption().getText();
     }
 
-    protected String getAtribute(String locator, String attribute) {
-        WebElement element = driver.findElement(By.xpath(locator));
+    protected String getAtribute(WebElement element,String attribute) {
         return element.getAttribute(attribute);
     }
 

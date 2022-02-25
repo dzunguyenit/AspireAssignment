@@ -1,10 +1,7 @@
 package com.aspire.script;
 
 import com.aspire.object.json.AbstractObJectJson;
-import com.aspire.pageobject.HomePage;
-import com.aspire.pageobject.InventoryPage;
-import com.aspire.pageobject.LoginPage;
-import com.aspire.pageobject.ProductPage;
+import com.aspire.pageobject.*;
 import common.BaseTest;
 import common.ManageEnviroment;
 import org.aeonbits.owner.ConfigFactory;
@@ -21,9 +18,13 @@ public class ManufacturingOrder extends BaseTest {
     HomePage homePage;
     InventoryPage inventoryPage;
     ProductPage productPage;
+    ManufacturingPage manufacturingPage;
+
     AbstractObJectJson data;
     String pathData = "/data/";
     ManageEnviroment.Enviroment urlEnviroment;
+
+    String randomProductName, randomOrderName;
 
     String email = "user@aspireapp.com";
     String password = "@sp1r3app";
@@ -41,9 +42,14 @@ public class ManufacturingOrder extends BaseTest {
         log.info("----------OPEN BROWSER-----------");
         driver = openMultiBrowser(browser, urlEnviroment.url(), version);
 
-        log.info("----------OPEN BROWSER-----------");
-
         loginPage = PageFactory.initElements(driver, LoginPage.class);
+
+        randomProductName = "Auto Product Name " + randomUniqueNumber();
+        log.info("----------randomProductName----------- " + randomProductName);
+
+        randomOrderName = "Auto Order Name " + randomUniqueNumber();
+
+        log.info("----------randomProductName----------- " + randomOrderName);
     }
 
     @Test
@@ -56,9 +62,50 @@ public class ManufacturingOrder extends BaseTest {
     }
 
     @Test
-    public void tc_02_LogInSuccessfully() {
+    public void tc_02_CreateProductSuccessfully() {
         inventoryPage = homePage.clickInventoryMenu();
         productPage = inventoryPage.clickMenuProduct();
+        productPage.clickCreateProduct();
+        productPage.inputProductName(randomProductName);
+        productPage.clickUpdateQuantity();
+        productPage.clickCreateQuantity();
+        productPage.inputQuantity("15");
+        productPage.btnSaveRecord();
+
+    }
+
+    @Test
+    public void tc_03_CreateManufacturingOrderSuccessfully() {
+        homePage = productPage.clickApplicationIcon();
+        manufacturingPage = homePage.clickManufacturingMenu();
+        manufacturingPage.clickCreateManufacturingOrders();
+        manufacturingPage.inputOrderName(randomProductName);
+        manufacturingPage.btnSaveRecord();
+
+//        Check Current state is "draft"
+        verifyEquals(manufacturingPage.getCurrentState("data-value"), "draft");
+//        Check state is active by get attribute "aria-checked" is True
+        verifyTrue(Boolean.valueOf(manufacturingPage.getCurrentState("aria-checked")));
+        manufacturingPage.clickConfirm();
+
+//        Check Current state is "draft"
+        verifyEquals(manufacturingPage.getCurrentState("data-value"), "confirmed");
+//        Check state is active by get attribute "aria-checked" is True
+        verifyTrue(Boolean.valueOf(manufacturingPage.getCurrentState("aria-checked")));
+
+        manufacturingPage.clickMarkAsDone();
+
+        verifyEquals(manufacturingPage.getConfirmationMessage(),"There are no components to consume. Are you still sure you want to continue?");
+        manufacturingPage.clickOk();
+
+        verifyEquals(manufacturingPage.getConfirmationImmediateProductionMessage(),"You have not recorded produced quantities yet, by clicking on apply Odoo will produce all the finished products and consume all components.");
+        manufacturingPage.clickApply();
+
+//        Check Current state is "done"
+        verifyEquals(manufacturingPage.getCurrentState("data-value"), "done");
+//        Check state is active by get attribute "aria-checked" is True
+        verifyTrue(Boolean.valueOf(manufacturingPage.getCurrentState("aria-checked")));
+
     }
 
     @AfterClass
