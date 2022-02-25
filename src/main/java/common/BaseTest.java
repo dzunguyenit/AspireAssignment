@@ -1,12 +1,8 @@
 package common;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.sql.Timestamp;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
-
-import com.aspire.object.json.AbstractObJectJson;
+import io.github.bonigarcia.wdm.ChromeDriverManager;
+import io.github.bonigarcia.wdm.FirefoxDriverManager;
+import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
@@ -16,11 +12,11 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.Assert;
 
-import com.google.gson.Gson;
-
-import io.github.bonigarcia.wdm.ChromeDriverManager;
-import io.github.bonigarcia.wdm.FirefoxDriverManager;
-import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.sql.Timestamp;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
 	WebDriver driver;
@@ -53,11 +49,6 @@ public class BaseTest {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		Long ExtentEmail = timestamp.getTime();
 		return ExtentEmail.toString();
-	}
-
-	public AbstractObJectJson getDataJson(String JsonFile) {
-		String json = readFile(JsonFile);
-		return new Gson().fromJson(json, AbstractObJectJson.class);
 	}
 
 	public String readFile(String filename) {

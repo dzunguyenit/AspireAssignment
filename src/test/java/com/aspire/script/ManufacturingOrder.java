@@ -1,6 +1,5 @@
 package com.aspire.script;
 
-import com.aspire.object.json.AbstractObJectJson;
 import com.aspire.pageobject.*;
 import common.BaseTest;
 import common.ManageEnviroment;
@@ -20,7 +19,6 @@ public class ManufacturingOrder extends BaseTest {
     ProductPage productPage;
     ManufacturingPage manufacturingPage;
 
-    AbstractObJectJson data;
     String pathData = "/data/";
     ManageEnviroment.Enviroment urlEnviroment;
 
@@ -38,7 +36,6 @@ public class ManufacturingOrder extends BaseTest {
         urlEnviroment = ConfigFactory.create(ManageEnviroment.Enviroment.class);
 
         String pathDataJson = System.getProperty("user.dir").concat(pathData).concat(dataJson);
-        data = getDataJson(pathDataJson);
         log.info("----------OPEN BROWSER-----------");
         driver = openMultiBrowser(browser, urlEnviroment.url(), version);
 
@@ -95,10 +92,10 @@ public class ManufacturingOrder extends BaseTest {
 
         manufacturingPage.clickMarkAsDone();
 
-        verifyEquals(manufacturingPage.getConfirmationMessage(),"There are no components to consume. Are you still sure you want to continue?");
+        verifyEquals(manufacturingPage.getConfirmationMessage(), "There are no components to consume. Are you still sure you want to continue?");
         manufacturingPage.clickOk();
 
-        verifyEquals(manufacturingPage.getConfirmationImmediateProductionMessage(),"You have not recorded produced quantities yet, by clicking on apply Odoo will produce all the finished products and consume all components.");
+        verifyEquals(manufacturingPage.getConfirmationImmediateProductionMessage(), "You have not recorded produced quantities yet, by clicking on apply Odoo will produce all the finished products and consume all components.");
         manufacturingPage.clickApply();
 
 //        Check Current state is "done"
