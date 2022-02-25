@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="Suite" parallel="tests">
 	<test name="New Customer, Edit Customer on Chrome">
-		<parameter name="browser" value="chrome" />
-		<parameter name="environment" value="prod" />
-		<parameter name="version" value="98.0.4758.102" />
-		<parameter name="dataJson" value="BankGuru.json" />
 		<classes>
 			<class name="com.aspire.script.ManufacturingOrder" />
 		</classes>

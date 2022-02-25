@@ -4,25 +4,29 @@ import org.aeonbits.owner.Config;
 import org.aeonbits.owner.Config.Sources;
 
 public class ManageEnviroment {
-	@Sources({ "file:data/${env}.properties" })
-	public interface Enviroment extends Config {
+    @Sources({"file:data/${env}.properties"})
+    public interface Enviroment extends Config {
 
-		String url();
+        String url();
 
-		String username();
+        String version();
 
-		String password();
+        String browser();
 
-		@Key("db.hostname")
-		String getDBHostname();
+        String username();
 
-		@Key("db.port")
-		int getDBPort();
+        String password();
 
-		@Key("db.username")
-		String getDBUsername();
+        @Key("db.hostname")
+        String getDBHostname();
 
-		@Key("db.password")
-		String getDBPassword();
-	}
+        @Key("db.port")
+        int getDBPort();
+
+        @Key("db.username")
+        String getDBUsername();
+
+        @Key("db.password")
+        String getDBPassword();
+    }
 }

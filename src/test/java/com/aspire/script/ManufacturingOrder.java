@@ -24,20 +24,15 @@ public class ManufacturingOrder extends BaseTest {
 
     String randomProductName, randomOrderName;
 
-    String email = "user@aspireapp.com";
-    String password = "@sp1r3app";
-
-    @Parameters({"browser", "environment", "version", "dataJson"})
     @BeforeClass
-    public void beforeClass(String browser, String environment, String version, String dataJson) {
+    public void beforeClass() {
 
-
-        ConfigFactory.setProperty("env", environment);
+//        Read file Property staging.properties
+        ConfigFactory.setProperty("env", "staging");
         urlEnviroment = ConfigFactory.create(ManageEnviroment.Enviroment.class);
 
-        String pathDataJson = System.getProperty("user.dir").concat(pathData).concat(dataJson);
         log.info("----------OPEN BROWSER-----------");
-        driver = openMultiBrowser(browser, urlEnviroment.url(), version);
+        driver = openMultiBrowser(urlEnviroment.browser(), urlEnviroment.url(), urlEnviroment.version());
 
         loginPage = PageFactory.initElements(driver, LoginPage.class);
 
@@ -51,8 +46,8 @@ public class ManufacturingOrder extends BaseTest {
 
     @Test
     public void tc_01_LogInSuccessfully() {
-        loginPage.inputEmail(email);
-        loginPage.inputPassword(password);
+        loginPage.inputEmail(urlEnviroment.username());
+        loginPage.inputPassword(urlEnviroment.password());
         homePage = loginPage.clickLogInButton();
         verifyEquals(homePage.getUrlHomePage(), "https://aspireapp.odoo.com/web#cids=1&action=menu");
 
