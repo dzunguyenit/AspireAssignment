@@ -79,7 +79,7 @@ public class ManufacturingOrder extends BaseTest {
         manufacturingPage = homePage.clickManufacturingMenu();
         manufacturingPage.clickCreateManufacturingOrders();
         manufacturingPage.btnSaveRecord();
-        // Don't input name -> show popup "Invalid fields: Name"
+        // Don't input name -> show popup "Invalid fields:"
         verifyEquals(productPage.getNotificationTitle(), "Invalid fields:");
 
 //        Get String "Product" from the total content "Product\nProduct Unit of Measure"
