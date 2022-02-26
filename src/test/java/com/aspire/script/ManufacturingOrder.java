@@ -5,6 +5,7 @@ import com.aspire.pageobject.*;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import common.BaseTest;
 import org.aeonbits.owner.ConfigFactory;
@@ -69,7 +70,7 @@ public class ManufacturingOrder extends BaseTest {
         loginPage.inputPassword(urlEnviroment.password());
         homePage = loginPage.clickLogInButton();
         verifyTrue(homePage.isDisplayedAvatarUser());
-        verifyEquals(homePage.getUrlHomePage(), "https://aspireapp.odoo.com/web#cids=1&action=menu");
+        verifyEquals(homePage.getUrlHomePage(), "1https://aspireapp.odoo.com/web#cids=1&action=menu");
 
     }
 
@@ -226,8 +227,14 @@ public class ManufacturingOrder extends BaseTest {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        } else if (result.getStatus() == ITestResult.SUCCESS) {
+            String temp = getScreenshot(driver);
+            try {
+                logger.log(Status.PASS,"Pass",MediaEntityBuilder.createScreenCaptureFromPath(temp).build());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-
         extent.flush();
 
     }
