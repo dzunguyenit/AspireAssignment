@@ -83,21 +83,6 @@ Run the test from file "runAspire.bat"
 Run all tests through maven by runAspire.xml suites
 $ mvn test
 
-Result
-Report Overview GitHub Logo Format: Alt Text
+Result:
 
-Report Result GitHub Logo Format: Alt Text
-
-Video Demo
-Register 01 - new account incorporated
-
-https://youtu.be/eEq9pwcZ4mc
-Register 02 - new account unincorporated
-
-https://youtu.be/g0jnGsZ7jT0
-Register 07 - Data driven negative check
-
-https://youtu.be/iX4X02J4Pho
-Login 07 - Data driven negative check
-
-https://youtu.be/boxtWvxSGas
+Report 
