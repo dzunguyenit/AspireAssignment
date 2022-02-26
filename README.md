@@ -86,3 +86,5 @@ $ mvn test
 Result:
 
 Report 
+
+https://github.com/dzunguyenit/AspireAssignment/blob/main/ReportsImage/report.png
