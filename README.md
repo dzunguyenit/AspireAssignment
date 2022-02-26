@@ -76,9 +76,11 @@ Edit runAspire.xml to run suite
 Intellij menu, click Build > Build Project
 
 $ mvn clean compile
+
 Command Line
 Run the test from file "RunProject.bat"
 Run all tests through maven by testng.xml suites
+
 $ mvn install or mvn test
 Result
 Report Overview GitHub Logo Format: Alt Text
