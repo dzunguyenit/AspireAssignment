@@ -45,6 +45,13 @@ public class ManufacturingOrder extends BaseTest {
 
     @Test
     public void tc_01_LogInSuccessfully() {
+
+//        SCENARIO: tc_01_LogInSuccessfully:
+//        1: Go to aspire login page: https://aspireapp.odoo.com/
+//        2: Log In with a username and password: user@aspireapp.com/@sp1r3app
+//        3: Verify HomePage is open with url: https://aspireapp.odoo.com/web#cids=1&action=menu
+//        and avatar user is displayed
+
         loginPage.inputEmail(urlEnviroment.username());
         loginPage.inputPassword(urlEnviroment.password());
         homePage = loginPage.clickLogInButton();
@@ -55,6 +62,15 @@ public class ManufacturingOrder extends BaseTest {
 
     @Test
     public void tc_02_CreateProductWithoutName() {
+
+//        SCENARIO: tc_02_CreateProductWithoutName:
+//        Precondition: Log In Successfully
+//        1. Click Inventory icon
+//        2. Click Menu Products -> Products -> Go to Product Page
+//        3. Click Create button
+//        4. Click Save button
+//        5. Verify error notification is displayed: "Invalid fields: Name"
+
         inventoryPage = homePage.clickInventoryMenu();
         productPage = inventoryPage.clickMenuProduct();
         productPage.clickCreateProduct();
@@ -66,6 +82,13 @@ public class ManufacturingOrder extends BaseTest {
 
     @Test
     public void tc_03_CreateProductSuccessfully() {
+
+//        SCENARIO: tc_03_CreateProductSuccessfully:
+//        Precondition: Log In Successfully
+//        1. Input random valid Product Name
+//        2. Click tab Quantity: Update quantity > 10( data = 15)
+//        3. Click Save button
+
         productPage.inputProductName(randomProductName);
         productPage.clickUpdateQuantity();
         productPage.clickCreateQuantity();
@@ -75,6 +98,20 @@ public class ManufacturingOrder extends BaseTest {
 
     @Test
     public void tc_04_CreateManufacturingOrderWithoutName() {
+
+//        SCENARIO: tc_04_CreateManufacturingOrderWithoutName:
+//        Precondition: Log In Successfully and Create Manufacturing Order item
+//        for the created Product on Scenerio: tc_03_CreateProductSuccessfully
+//
+//        1. Back to HomePage by clicking Application Icon
+//        2. Click Manufacturing Menu
+//        3. Click Create button
+//        4. Click button Save Record
+//        5. Verify error notification is displayed: "Invalid fields:"
+//        6. Verify content notification is displayed:
+//        Product
+//        Product Unit of Measure
+
         homePage = productPage.clickApplicationIcon();
         manufacturingPage = homePage.clickManufacturingMenu();
         manufacturingPage.clickCreateManufacturingOrders();
@@ -96,6 +133,21 @@ public class ManufacturingOrder extends BaseTest {
 
     @Test
     public void tc_05_CreateManufacturingOrderSuccessfully() {
+
+//        SCENARIO: tc_05_CreateManufacturingOrderSuccessfully:
+//        Precondition: Log In Successfully and Create Manufacturing Order item
+//        for the created Product on Scenerio: tc_03_CreateProductSuccessfully
+//
+//        1. Input product name for the created Product on Scenario: tc_03_CreateProductSuccessfully
+//        2. Get value of: quantity, scheduled date and responsible user -> Expected Result
+//        3. Click Save
+//        4. Status change -> draft -> Verify status draft is active
+//        5. Click confirm -> Status change -> confirmed -> Verify status confirmed is active
+//        5. Click Mark As Done -> Verify popup is displayed "There are no components to consume. Are you still sure you want to continue?"
+//        6. Click Ok -> Verify popup is displayed "You have not recorded produced quantities yet, by clicking on apply Odoo will produce all the finished products and consume all components."
+//        7. Click Apply -> Status change -> done -> Verify status done is active
+//        8. Verify the new Manufacturing Order is created with corrected information includes: Product Name, Quantity, scheduledDate, responsibleUser
+
         manufacturingPage.inputOrderName(randomProductName);
 
         String quantity = "1.00";
