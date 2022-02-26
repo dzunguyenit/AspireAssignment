@@ -2,7 +2,6 @@ package common;
 
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -24,7 +23,7 @@ public class BaseElement {
         this.driver = driver;
     }
 
-    private int timeouts = 5;
+    private int timeouts = 10;
 
     // Web Browser
     protected void openUrl(String url) {
@@ -119,7 +118,7 @@ public class BaseElement {
         return element.getFirstSelectedOption().getText();
     }
 
-    protected String getAtribute(WebElement element,String attribute) {
+    protected String getAtribute(WebElement element, String attribute) {
         return element.getAttribute(attribute);
     }
 
@@ -153,6 +152,10 @@ public class BaseElement {
 
     protected boolean isDisplayed(String locator) {
         WebElement element = driver.findElement(By.xpath(locator));
+        return element.isDisplayed();
+    }
+
+    protected boolean isDisplayed(WebElement element) {
         return element.isDisplayed();
     }
 
@@ -385,6 +388,16 @@ public class BaseElement {
     protected void waitVisible(WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, timeouts);
         wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    protected void waitVisible(String locator) {
+        WebDriverWait wait = new WebDriverWait(driver, timeouts);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+    }
+
+    protected void waitAtributeContains(WebElement element, String attribute, String value) {
+        WebDriverWait wait = new WebDriverWait(driver, timeouts);
+        wait.until(ExpectedConditions.attributeContains(element, attribute, value));
     }
 
     protected void waitVisibleDynamic(String value) {

@@ -18,8 +18,10 @@ public class HomePage extends BaseElement {
     @FindBy(xpath = "//div[text()='Manufacturing']")
     WebElement lbManufacturing;
 
+    @FindBy(css = "img.o_user_avatar")
+    WebElement lbUserAvatar;
+
     public String getUrlHomePage() {
-        sleep(2);
         return getCurrentUrl();
     }
 
@@ -32,5 +34,10 @@ public class HomePage extends BaseElement {
         waitVisible(lbManufacturing);
         click(lbManufacturing);
         return PageFactory.initElements(driver, ManufacturingPage.class);
+    }
+
+    public boolean isDisplayedAvatarUser() {
+        waitVisible(lbUserAvatar);
+        return isDisplayed(lbUserAvatar);
     }
 }

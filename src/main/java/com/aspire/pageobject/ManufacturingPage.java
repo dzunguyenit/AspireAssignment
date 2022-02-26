@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ManufacturingPage extends BaseElement {
 
@@ -59,9 +60,14 @@ public class ManufacturingPage extends BaseElement {
     }
 
     public String getCurrentState(String attribute) {
-        sleep(3);
         waitVisible(lbCurrentState);
         return getAtribute(lbCurrentState, attribute);
+    }
+
+    public void waitCurrentState(String state) {
+        sleep(2);
+        String dynamicLocator = String.format("//button[@title='Current state' and @data-value='%s']", state);
+        waitVisible(dynamicLocator);
     }
 
     public void clickConfirm() {

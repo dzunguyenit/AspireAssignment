@@ -49,6 +49,7 @@ public class ManufacturingOrder extends BaseTest {
         loginPage.inputEmail(urlEnviroment.username());
         loginPage.inputPassword(urlEnviroment.password());
         homePage = loginPage.clickLogInButton();
+        verifyTrue(homePage.isDisplayedAvatarUser());
         verifyEquals(homePage.getUrlHomePage(), "https://aspireapp.odoo.com/web#cids=1&action=menu");
 
     }
@@ -74,13 +75,17 @@ public class ManufacturingOrder extends BaseTest {
         manufacturingPage.inputOrderName(randomProductName);
         manufacturingPage.btnSaveRecord();
 
-//        Check Current state is "draft"
+//        Wait current state until is "draft"
+        manufacturingPage.waitCurrentState("draft");
+//        Check current state is "draft"
         verifyEquals(manufacturingPage.getCurrentState("data-value"), "draft");
 //        Check state "draft" is active by get attribute "aria-checked" is True
         verifyTrue(Boolean.valueOf(manufacturingPage.getCurrentState("aria-checked")));
         manufacturingPage.clickConfirm();
 
-//        Check Current state is "confirmed"
+//        Wait current state until is "confirmed"
+        manufacturingPage.waitCurrentState("confirmed");
+//        Check current state is "confirmed"
         verifyEquals(manufacturingPage.getCurrentState("data-value"), "confirmed");
 //        Check state "confirmed" is active by get attribute "aria-checked" is True
         verifyTrue(Boolean.valueOf(manufacturingPage.getCurrentState("aria-checked")));
@@ -93,7 +98,9 @@ public class ManufacturingOrder extends BaseTest {
         verifyEquals(manufacturingPage.getConfirmationImmediateProductionMessage(), "You have not recorded produced quantities yet, by clicking on apply Odoo will produce all the finished products and consume all components.");
         manufacturingPage.clickApply();
 
-//        Check Current state is "done"
+//        Wait current state until is "done"
+        manufacturingPage.waitCurrentState("done");
+//        Check current state is "done"
         verifyEquals(manufacturingPage.getCurrentState("data-value"), "done");
 //        Check state "done" is active by get attribute "aria-checked" is True
         verifyTrue(Boolean.valueOf(manufacturingPage.getCurrentState("aria-checked")));
