@@ -93,7 +93,7 @@
                 <configuration>
                     <!-- Run TestNG xml file -->
                     <suiteXmlFiles>
-                        <file>src/test/java/runBankGuru.xml</file>
+                        <file>runAspire.xml</file>
                     </suiteXmlFiles>
 
                 </configuration>
