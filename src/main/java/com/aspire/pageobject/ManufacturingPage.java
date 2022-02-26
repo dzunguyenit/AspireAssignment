@@ -59,7 +59,7 @@ public class ManufacturingPage extends BaseElement {
     }
 
     public String getCurrentState(String attribute) {
-        sleep(2);
+        sleep(3);
         waitVisible(lbCurrentState);
         return getAtribute(lbCurrentState, attribute);
     }
