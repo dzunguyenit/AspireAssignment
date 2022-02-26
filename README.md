@@ -78,9 +78,9 @@ Intellij menu, click Build > Build Project
 $ mvn clean compile
 
 Command Line
-Run the test from file "RunProject.bat"
-Run all tests through maven by runAspire.xml suites
+Run the test from file "runAspire.bat"
 
+Run all tests through maven by runAspire.xml suites
 $ mvn test
 
 Result
