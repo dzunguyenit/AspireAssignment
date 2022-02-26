@@ -79,9 +79,10 @@ $ mvn clean compile
 
 Command Line
 Run the test from file "RunProject.bat"
-Run all tests through maven by testng.xml suites
+Run all tests through maven by runAspire.xml suites
 
-$ mvn install or mvn test
+$ mvn test
+
 Result
 Report Overview GitHub Logo Format: Alt Text
 
