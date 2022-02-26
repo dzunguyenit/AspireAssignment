@@ -3,8 +3,11 @@ package common;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -13,7 +16,9 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.Assert;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -93,6 +98,27 @@ public class BaseTest {
 
 	public void closeBrowser() {
 		driver.quit();
+	}
+
+	public static String getScreenshot(WebDriver driver)
+	{
+		TakesScreenshot ts=(TakesScreenshot) driver;
+
+		File src=ts.getScreenshotAs(OutputType.FILE);
+
+		String path=System.getProperty("user.dir")+"/Screenshot/"+System.currentTimeMillis()+".png";
+
+		File destination=new File(path);
+
+		try
+		{
+			FileUtils.copyFile(src, destination);
+		} catch (IOException e)
+		{
+			System.out.println("Capture Failed "+e.getMessage());
+		}
+
+		return path;
 	}
 
 }

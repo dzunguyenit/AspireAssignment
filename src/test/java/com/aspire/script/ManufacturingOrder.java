@@ -2,13 +2,18 @@ package com.aspire.script;
 
 import Utils.PropertiesUtil;
 import com.aspire.pageobject.*;
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import common.BaseTest;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.ITestResult;
+import org.testng.annotations.*;
+
+import java.io.IOException;
 
 public class ManufacturingOrder extends BaseTest {
     WebDriver driver;
@@ -23,8 +28,16 @@ public class ManufacturingOrder extends BaseTest {
 
     String randomProductName, randomOrderName;
 
+    ExtentReports extent;
+    ExtentTest logger;
+
+
     @BeforeClass
     public void beforeClass() {
+
+        ExtentHtmlReporter reporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/Reports/ManufacturingOrder.html");
+        extent = new ExtentReports();
+        extent.attachReporter(reporter);
 
 //        Read file Property staging.properties
         ConfigFactory.setProperty("env", "staging");
@@ -51,7 +64,7 @@ public class ManufacturingOrder extends BaseTest {
 //        2: Log In with a username and password: user@aspireapp.com/@sp1r3app
 //        3: Verify HomePage is open with url: https://aspireapp.odoo.com/web#cids=1&action=menu
 //        and avatar user is displayed
-
+        logger = extent.createTest("tc_01_LogInSuccessfully");
         loginPage.inputEmail(urlEnviroment.username());
         loginPage.inputPassword(urlEnviroment.password());
         homePage = loginPage.clickLogInButton();
@@ -71,6 +84,7 @@ public class ManufacturingOrder extends BaseTest {
 //        4. Click Save button
 //        5. Verify error notification is displayed: "Invalid fields: Name"
 
+        logger = extent.createTest("tc_02_CreateProductWithoutName");
         inventoryPage = homePage.clickInventoryMenu();
         productPage = inventoryPage.clickMenuProduct();
         productPage.clickCreateProduct();
@@ -88,7 +102,7 @@ public class ManufacturingOrder extends BaseTest {
 //        1. Input random valid Product Name
 //        2. Click tab Quantity: Update quantity > 10( data = 15)
 //        3. Click Save button
-
+        logger = extent.createTest("tc_03_CreateProductSuccessfully");
         productPage.inputProductName(randomProductName);
         productPage.clickUpdateQuantity();
         productPage.clickCreateQuantity();
@@ -112,6 +126,7 @@ public class ManufacturingOrder extends BaseTest {
 //        Product
 //        Product Unit of Measure
 
+        logger = extent.createTest("tc_04_CreateManufacturingOrderWithoutName");
         homePage = productPage.clickApplicationIcon();
         manufacturingPage = homePage.clickManufacturingMenu();
         manufacturingPage.clickCreateManufacturingOrders();
@@ -148,6 +163,7 @@ public class ManufacturingOrder extends BaseTest {
 //        7. Click Apply -> Status change -> done -> Verify status done is active
 //        8. Verify the new Manufacturing Order is created with corrected information includes: Product Name, Quantity, scheduledDate, responsibleUser
 
+        logger = extent.createTest("tc_05_CreateManufacturingOrderSuccessfully");
         manufacturingPage.inputOrderName(randomProductName);
 
         String quantity = "1.00";
@@ -198,6 +214,21 @@ public class ManufacturingOrder extends BaseTest {
         verifyEquals(quantityProduct, quantity);
         verifyEquals(scheduleTimeFinal, scheduledDate);
         verifyEquals(responsibleUserFinal, responsibleUser);
+
+    }
+
+    @AfterMethod
+    public void tearDown(ITestResult result) {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            String temp = getScreenshot(driver);
+            try {
+                logger.fail(result.getThrowable().getMessage(), MediaEntityBuilder.createScreenCaptureFromPath(temp).build());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        extent.flush();
 
     }
 
