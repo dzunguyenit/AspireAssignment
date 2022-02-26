@@ -4,7 +4,7 @@ import org.aeonbits.owner.Config;
 import org.aeonbits.owner.Config.Sources;
 
 public class PropertiesUtil {
-    @Sources({"file:data/${env}.properties"})
+    @Sources({"file:src/main/resources/${env}.properties"})
     public interface Enviroment extends Config {
 
         String url();
