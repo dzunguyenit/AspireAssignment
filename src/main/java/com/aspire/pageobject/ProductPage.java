@@ -37,7 +37,11 @@ public class ProductPage extends BaseElement {
     @FindBy(css = "a[title='Home menu']")
     WebElement iconApplication;
 
+    @FindBy(css = ".o_notification_manager .o_notification_content")
+    WebElement lbNotificationContent;
 
+    @FindBy(css = ".o_notification_title")
+    WebElement lbNotificationTitle;
 
     public String getUrlHomePage() {
         sleep(2);
@@ -86,4 +90,12 @@ public class ProductPage extends BaseElement {
         return PageFactory.initElements(driver, HomePage.class);
     }
 
+    public String getNotificationContent() {
+        waitVisible(lbNotificationContent);
+        return getText(lbNotificationContent);
+    }
+    public String getNotificationTitle() {
+        waitVisible(lbNotificationTitle);
+        return getText(lbNotificationTitle);
+    }
 }

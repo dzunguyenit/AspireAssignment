@@ -30,6 +30,8 @@ public class HomePage extends BaseElement {
         click(lbInventory);
         return PageFactory.initElements(driver, InventoryPage.class);
     }
+
+
     public ManufacturingPage clickManufacturingMenu() {
         waitVisible(lbManufacturing);
         click(lbManufacturing);
@@ -40,4 +42,5 @@ public class HomePage extends BaseElement {
         waitVisible(lbUserAvatar);
         return isDisplayed(lbUserAvatar);
     }
+
 }

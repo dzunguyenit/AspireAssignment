@@ -55,20 +55,27 @@ public class ManufacturingOrder extends BaseTest {
     }
 
     @Test
-    public void tc_02_CreateProductSuccessfully() {
+    public void tc_02_CreateProductWithoutName() {
         inventoryPage = homePage.clickInventoryMenu();
         productPage = inventoryPage.clickMenuProduct();
         productPage.clickCreateProduct();
+        productPage.btnSaveRecord();
+        // Don't input name -> show popup "Invalid fields: Name"
+        verifyEquals(productPage.getNotificationTitle(), "Invalid fields:");
+        verifyEquals(productPage.getNotificationContent(), "Name");
+    }
+
+    @Test
+    public void tc_03_CreateProductSuccessfully() {
         productPage.inputProductName(randomProductName);
         productPage.clickUpdateQuantity();
         productPage.clickCreateQuantity();
         productPage.inputQuantity("15");
         productPage.btnSaveRecord();
-
     }
 
     @Test
-    public void tc_03_CreateManufacturingOrderSuccessfully() {
+    public void tc_04_CreateManufacturingOrderSuccessfully() {
         homePage = productPage.clickApplicationIcon();
         manufacturingPage = homePage.clickManufacturingMenu();
         manufacturingPage.clickCreateManufacturingOrders();
