@@ -91,6 +91,10 @@ public class BaseElement {
         element.sendKeys(value);
     }
 
+    protected void inputKeyBoard(WebElement element, Keys key) {
+        element.sendKeys(key);
+    }
+
     protected void onlyInput(WebElement element, String value) {
         element.sendKeys(value);
     }
@@ -317,10 +321,10 @@ public class BaseElement {
     }
 
     // Javascript
-    protected Object executeJavascriptToBrowser(String javaSript) {
+    protected String executeJavascriptToBrowser(String javaSript) {
         try {
             JavascriptExecutor js = (JavascriptExecutor) driver;
-            return js.executeScript(javaSript);
+            return (String) js.executeScript(javaSript);
         } catch (Exception e) {
             e.getMessage();
             return null;

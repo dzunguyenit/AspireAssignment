@@ -97,10 +97,14 @@ public class ManufacturingOrder extends BaseTest {
 
     @Test
     public void tc_05_CreateManufacturingOrderSuccessfully() {
-        homePage = productPage.clickApplicationIcon();
-        manufacturingPage = homePage.clickManufacturingMenu();
-        manufacturingPage.clickCreateManufacturingOrders();
         manufacturingPage.inputOrderName(randomProductName);
+
+        String quantity = "1.00";
+//        manufacturingPage.inputQuantity(String.valueOf(quantity));
+
+        String scheduledDate = manufacturingPage.getScheduledDate();
+        String responsibleUser = manufacturingPage.getResponsibleUser();
+
         manufacturingPage.btnSaveRecord();
 
 //        Wait current state until is "draft"
@@ -132,6 +136,19 @@ public class ManufacturingOrder extends BaseTest {
         verifyEquals(manufacturingPage.getCurrentState("data-value"), "done");
 //        Check state "done" is active by get attribute "aria-checked" is True
         verifyTrue(Boolean.valueOf(manufacturingPage.getCurrentState("aria-checked")));
+
+//        Validate the new Manufacturing Order is created with corrected information.
+//        Verify Manufacturing Order Infomation includes: Product Name, Quantity, scheduledDate, responsibleUser
+
+        String productName = manufacturingPage.getProductName();
+        String quantityProduct = manufacturingPage.getQuantity();
+        String scheduleTimeFinal = manufacturingPage.getScheduledTime();
+        String responsibleUserFinal = manufacturingPage.getResponsible();
+
+        verifyEquals(productName, randomProductName);
+        verifyEquals(quantityProduct, quantity);
+        verifyEquals(scheduleTimeFinal, scheduledDate);
+        verifyEquals(responsibleUserFinal, responsibleUser);
 
     }
 

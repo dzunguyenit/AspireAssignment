@@ -1,6 +1,7 @@
 package com.aspire.pageobject;
 
 import common.BaseElement;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -49,6 +50,22 @@ public class ManufacturingPage extends BaseElement {
     @FindBy(css = ".o_notification_title")
     WebElement lbNotificationTitle;
 
+    @FindBy(xpath = "//input[@name='product_qty' and not(@title)]")
+    WebElement txtQuantity;
+
+    @FindBy(css = "[name='product_id'][id*='o_field_input'] span")
+    WebElement lbProductName;
+
+    @FindBy(css = "[name=qty_producing]")
+    WebElement lbQuantity;
+
+    @FindBy(css = "span[name=date_planned_start]")
+    WebElement lbDatePlanStart;
+
+    @FindBy(css = "[name=user_id] span")
+    WebElement lbResponsible;
+
+
     public void clickCreateManufacturingOrders() {
         waitVisible(btnCreateManufacturingOrders);
         click(btnCreateManufacturingOrders);
@@ -71,7 +88,7 @@ public class ManufacturingPage extends BaseElement {
     }
 
     public void waitCurrentState(String state) {
-        sleep(2);
+        sleep(3);
         String dynamicLocator = String.format("//button[@title='Current state' and @data-value='%s']", state);
         waitVisible(dynamicLocator);
     }
@@ -116,4 +133,39 @@ public class ManufacturingPage extends BaseElement {
         return getText(lbNotificationTitle);
     }
 
+    public String getScheduledDate() {
+        sleep(1);
+        return executeJavascriptToBrowser("return $('input.datetimepicker-input').val()");
+    }
+
+    public String getResponsibleUser() {
+        sleep(1);
+        return executeJavascriptToBrowser("return $('[name=\"user_id\"] input').val()");
+    }
+
+
+    public void inputQuantity(String quantity) {
+//        waitVisible(txtQuantity);
+        input(txtQuantity, quantity);
+    }
+
+    public String getQuantity() {
+        waitVisible(lbQuantity);
+        return getText(lbQuantity);
+    }
+
+    public String getProductName() {
+        waitVisible(lbProductName);
+        return getText(lbProductName);
+    }
+
+    public String getScheduledTime() {
+        waitVisible(lbDatePlanStart);
+        return getText(lbDatePlanStart);
+    }
+
+    public String getResponsible() {
+        waitVisible(lbResponsible);
+        return getText(lbResponsible);
+    }
 }

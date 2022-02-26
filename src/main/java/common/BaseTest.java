@@ -87,6 +87,10 @@ public class BaseTest {
 		Assert.assertEquals(actual, expected);
 	}
 
+	protected void verifyEquals(int actual, int expected) {
+		Assert.assertEquals(actual, expected);
+	}
+
 	public void closeBrowser() {
 		driver.quit();
 	}
