@@ -1,8 +1,8 @@
 package com.aspire.script;
 
+import Utils.PropertiesUtil;
 import com.aspire.pageobject.*;
 import common.BaseTest;
-import common.ManageEnviroment;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -19,7 +19,7 @@ public class ManufacturingOrder extends BaseTest {
     ManufacturingPage manufacturingPage;
 
     String pathData = "/data/";
-    ManageEnviroment.Enviroment urlEnviroment;
+    PropertiesUtil.Enviroment urlEnviroment;
 
     String randomProductName, randomOrderName;
 
@@ -28,7 +28,7 @@ public class ManufacturingOrder extends BaseTest {
 
 //        Read file Property staging.properties
         ConfigFactory.setProperty("env", "staging");
-        urlEnviroment = ConfigFactory.create(ManageEnviroment.Enviroment.class);
+        urlEnviroment = ConfigFactory.create(PropertiesUtil.Enviroment.class);
 
         log.info("----------OPEN BROWSER-----------");
         driver = openMultiBrowser(urlEnviroment.browser(), urlEnviroment.url(), urlEnviroment.version());

@@ -1,9 +1,9 @@
-package common;
+package Utils;
 
 import org.aeonbits.owner.Config;
 import org.aeonbits.owner.Config.Sources;
 
-public class ManageEnviroment {
+public class PropertiesUtil {
     @Sources({"file:data/${env}.properties"})
     public interface Enviroment extends Config {
 
