@@ -100,8 +100,6 @@ public class ManufacturingOrder extends BaseTest {
         manufacturingPage.inputOrderName(randomProductName);
 
         String quantity = "1.00";
-//        manufacturingPage.inputQuantity(String.valueOf(quantity));
-
         String scheduledDate = manufacturingPage.getScheduledDate();
         String responsibleUser = manufacturingPage.getResponsibleUser();
 
