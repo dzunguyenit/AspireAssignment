@@ -25,6 +25,8 @@ public class BaseElement {
 
     private int timeouts = 10;
 
+
+
     // Web Browser
     protected void openUrl(String url) {
         driver.get(url);

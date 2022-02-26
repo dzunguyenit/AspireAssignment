@@ -70,7 +70,7 @@ public class ManufacturingOrder extends BaseTest {
         loginPage.inputPassword(urlEnviroment.password());
         homePage = loginPage.clickLogInButton();
         verifyTrue(homePage.isDisplayedAvatarUser());
-        verifyEquals(homePage.getUrlHomePage(), "1https://aspireapp.odoo.com/web#cids=1&action=menu");
+        verifyEquals(homePage.getUrlHomePage(), "https://aspireapp.odoo.com/web#cids=1&action=menu");
 
     }
 

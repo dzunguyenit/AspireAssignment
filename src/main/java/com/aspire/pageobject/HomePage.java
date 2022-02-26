@@ -39,6 +39,7 @@ public class HomePage extends BaseElement {
     }
 
     public boolean isDisplayedAvatarUser() {
+        sleep(2);
         waitVisible(lbUserAvatar);
         return isDisplayed(lbUserAvatar);
     }
