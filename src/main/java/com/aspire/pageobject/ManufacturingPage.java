@@ -43,6 +43,12 @@ public class ManufacturingPage extends BaseElement {
     @FindBy(xpath = "//span[text()='Apply']")
     WebElement btnApply;
 
+    @FindBy(css = ".o_notification_manager .o_notification_content")
+    WebElement lbNotificationContent;
+
+    @FindBy(css = ".o_notification_title")
+    WebElement lbNotificationTitle;
+
     public void clickCreateManufacturingOrders() {
         waitVisible(btnCreateManufacturingOrders);
         click(btnCreateManufacturingOrders);
@@ -99,4 +105,15 @@ public class ManufacturingPage extends BaseElement {
         waitVisible(btnApply);
         click(btnApply);
     }
+
+    public String getNotificationContent() {
+        waitVisible(lbNotificationContent);
+        return getText(lbNotificationContent);
+    }
+
+    public String getNotificationTitle() {
+        waitVisible(lbNotificationTitle);
+        return getText(lbNotificationTitle);
+    }
+
 }

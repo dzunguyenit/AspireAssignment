@@ -75,7 +75,28 @@ public class ManufacturingOrder extends BaseTest {
     }
 
     @Test
-    public void tc_04_CreateManufacturingOrderSuccessfully() {
+    public void tc_04_CreateManufacturingOrderWithoutName() {
+        homePage = productPage.clickApplicationIcon();
+        manufacturingPage = homePage.clickManufacturingMenu();
+        manufacturingPage.clickCreateManufacturingOrders();
+        manufacturingPage.btnSaveRecord();
+        // Don't input name -> show popup "Invalid fields: Name"
+        verifyEquals(productPage.getNotificationTitle(), "Invalid fields:");
+
+//        Get String "Product" from the total content "Product\nProduct Unit of Measure"
+        String contentNotification = productPage.getNotificationContent();
+
+//        Get String "Product" from the total content "Product\nProduct Unit of Measure"
+        String productNotification = contentNotification.substring(0, 7);
+        verifyEquals(productNotification, "Product");
+
+//        Get String "Product Unit of Measure" from the total content "ProductProduct Unit of Measure"
+        String productUnitNotification = contentNotification.substring(7, contentNotification.length());
+        verifyEquals(productUnitNotification, "\nProduct Unit of Measure");
+    }
+
+    @Test
+    public void tc_05_CreateManufacturingOrderSuccessfully() {
         homePage = productPage.clickApplicationIcon();
         manufacturingPage = homePage.clickManufacturingMenu();
         manufacturingPage.clickCreateManufacturingOrders();
